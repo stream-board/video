@@ -4,7 +4,7 @@ var remoteVideo;
 var peerConnection;
 var uuid;
 var serverConnection;
-
+var SOCKET_ADDRESS = "54.210.26.37"
 var peerConnectionConfig = {
   'iceServers': [
     {'urls': 'stun:stun.services.mozilla.com'},
@@ -18,7 +18,7 @@ function pageReady() {
   localVideo = document.getElementById('localVideo');
   remoteVideo = document.getElementById('remoteVideo');
 
-  serverConnection = new WebSocket('wss://' + window.location.hostname + ':8444');
+  serverConnection = new WebSocket('wss://' + SOCKET_ADDRESS + ':8444');
   serverConnection.onmessage = gotMessageFromServer;
 
   var constraints = {
