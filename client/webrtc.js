@@ -4,7 +4,8 @@ var remoteVideo;
 var peerConnection;
 var uuid;
 var serverConnection;
-var SOCKET_ADDRESS = "54.210.26.37"
+//var SOCKET_ADDRESS = "54.210.26.37"
+var SOCKET_ADDRESS = window.location.hostname;
 var peerConnectionConfig = {
   'iceServers': [
     {'urls': 'stun:stun.services.mozilla.com'},
