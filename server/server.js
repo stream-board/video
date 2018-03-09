@@ -25,12 +25,27 @@ const wss = new WebSocketServer({server: httpsServer});
 wss.on('connection', function(ws) {
   ws.on('message', function(message) {
     // Broadcast any received message to all clients
-    console.log('received: %s', message);
+    //console.log('received: %s', message);
     wss.broadcast(message);
   });
 });
 
 wss.broadcast = function(data) {
+  this.clients.forEach(function(client) {
+    seen = []; 
+
+    var replacer = function(key, value) {
+      if (value != null && typeof value == "object") {
+        if (seen.indexOf(value) >= 0) {
+          return;
+        }
+        seen.push(value);
+      }
+      return value;
+    };
+    console.log( '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' + JSON.stringify(client, replacer)  )  
+  });
+  
   this.clients.forEach(function(client) {
     if(client.readyState === WebSocket.OPEN) {
       client.send(data);
